@@ -1,0 +1,60 @@
+def imprimir_tablero(tablero):
+    for fila in tablero:
+        print("\t".join(fila))
+    print("\n")
+
+def guardar_tablero_en_archivo(tablero, nombre_archivo):
+    with open(nombre_archivo, "a") as archivo:
+        for fila in tablero:
+            archivo.write("\t".join(map(str, fila)) + "\n")
+        archivo.write("\n")
+
+def realizar_movimiento(tablero, fila_origen, col_origen, fila_destino, col_destino):
+    pieza = tablero[fila_origen][col_origen]
+    tablero[fila_origen][col_origen] = " "
+    tablero[fila_destino][col_destino] = pieza
+
+def main():
+    nombre_archivo = input("Introduce el nombre del archivo para guardar la partida: ")
+
+    tablero_inicial = [
+        ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+        ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+        [" ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " ", " "],
+        ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+        ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+    ]
+
+    guardar_tablero_en_archivo(tablero_inicial, nombre_archivo)
+
+    turno = 1
+    while True:
+        imprimir_tablero(tablero_inicial)
+
+        opcion = input("¿Quieres hacer un movimiento (s/n)? ").lower()
+        if opcion != 's':
+            break
+
+        fila_origen = int(input("Introduce la fila de la pieza que quieres mover: "))
+        col_origen = int(input("Introduce la columna de la pieza que quieres mover: "))
+        fila_destino = int(input("Introduce la fila a la que quieres mover la pieza: "))
+        col_destino = int(input("Introduce la columna a la que quieres mover la pieza: "))
+
+        realizar_movimiento(tablero_inicial, fila_origen, col_origen, fila_destino, col_destino)
+        guardar_tablero_en_archivo(tablero_inicial, nombre_archivo)
+
+        turno += 1
+
+    print("Partida finalizada.")
+    movimiento = int(input("Introduce el número de movimiento que quieres ver: "))
+
+    with open(nombre_archivo, "r") as archivo:
+        movimientos = archivo.read().split('\n\n')
+        if 1 <= movimiento <= turno:
+            imprimir_tablero([fila.split("\t") for fila in movimientos[movimiento - 1].split("\n") if fila])
+
+if __name__ == "__main__":
+    main()
