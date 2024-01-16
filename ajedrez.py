@@ -24,7 +24,7 @@ class Ajedrez:
         # Guardar el estado actual del tablero en un archivo
         with open(f"{self.jugador}_ajedrez.txt", "a") as archivo:
             for fila in self.tablero:
-                archivo.write("\t".join(map(str, fila)) + "\n")#enconding: utf-8
+                archivo.write("\t".join(map(str, fila)) + "\n")
             archivo.write("\n")
 
     def mostrar_tablero(self):
