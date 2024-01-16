@@ -94,7 +94,7 @@ class Ajedrez:
 
 def jugar_ajedrez(jugador):
     # Crear una instancia de la clase Ajedrez y comenzar el juego
-    juego_ajedrez = Ajedrez(jugador)#enconding: utf-8
+    juego_ajedrez = Ajedrez(jugador)
     juego_ajedrez.mostrar_tablero()
     mover_numero = 0
 
@@ -131,4 +131,4 @@ def jugar_ajedrez(jugador):
 if __name__ == "__main__":
     # Iniciar el juego de ajedrez con el nombre del jugador
     jugador = input("Cual es el nombre de la partida (insertar nombre de jugador)?: ")
-    jugar_ajedrez(jugador)#enconding: utf-8
+    jugar_ajedrez(jugador)
